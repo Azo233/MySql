@@ -12,7 +12,7 @@ create table korisnik(
     oib char (11) not null,
     adresa varchar (50),
     mobilna_tarifa  int not null,
-    mobilni_uredaji int not null,
+    mobilni_uredaj int not null,
     fiksni_telefon int not null,
     tv int not null,
     internet int not null
@@ -23,23 +23,24 @@ create table mobilna_tarifa(
     naziv varchar(50) not null,
     cijena decimal(18,2),
     podatkovni_promet int not null,
-    SMS_MIN int not null,
-    mobilni_uredaji int not null
+    sms_min int not null
+   
     
 );
 
-create table mobilni_uredaji (
+create table mobilni_uredaj (
     sifra int not null primary key auto_increment,
     marka varchar(50) not null,
     model varchar (50) not null,
     cijena decimal (18,2) not null,
-    OS varchar(20)
+    os varchar(20),
+    mobilna_tarifa int not null
 );
 
 create table fiksni_telefon (
     sifra int not null primary key auto_increment,
     cijena decimal (18,2) not null,
-    MIN int not null
+    min int not null
 );
 
 create table tv(
@@ -59,10 +60,10 @@ create table internet (
 
 
 alter table korisnik add foreign key (mobilna_tarifa) references mobilna_tarifa(sifra);
-alter table korisnik add foreign key (mobilni_uredaji) references mobilni_uredaji(sifra);
+alter table korisnik add foreign key (mobilni_uredaj) references mobilni_uredaj(sifra);
 alter table korisnik add foreign key (fiksni_telefon) references fiksni_telefon(sifra);
 alter table korisnik add foreign key (tv) references tv(sifra);
 alter table korisnik add foreign key (internet) references internet(sifra);
-alter table mobilna_tarifa add foreign key (mobilni_uredaji) references mobilni_uredaji(sifra);
+alter table mobilni_uredaj add foreign key (mobilna_tarifa) references mobilna_tarifa(sifra);
 
 
